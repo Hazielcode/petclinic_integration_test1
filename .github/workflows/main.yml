@@ -1,10 +1,10 @@
-name: CI - Petclinic Tests
+name: CI Pipeline - PetClinic
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
@@ -17,8 +17,12 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: "temurin"
 
       - name: Build with Maven
-        run: mvn clean test -Dmaven.test.failure.ignore=false
+        run: mvn -B clean package
+
+      - name: Run tests
+        run: mvn test
+
